@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import Header from "../header";
-import RandomPokemon from "../random-pokemon";
+import RandomCards from "../random-pokemon";
 import ItemList from "../item-list";
 import PokemonDetails from "../pokemon-details";
 
@@ -13,7 +13,7 @@ export default class App extends Component {
         return (
             <div className="app">
               <Header />
-              <RandomPokemon />
+              <RandomCards />
 
               <div className="row mb-2">
                   <div className="col-md-6">

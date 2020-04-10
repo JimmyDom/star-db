@@ -1,6 +1,6 @@
 export default class apiService {
     // _apiBase = "https://swapi.co/api/";
-    _apiBase = "https://pokeapi.co/api/v2/";
+    _apiBase = "https://api.magicthegathering.io/v1/";
     async getResource(url) {
 
         const res = await fetch(`${this._apiBase}${url}`);
@@ -12,31 +12,23 @@ export default class apiService {
         return await res.json();
     }
 
-    async getAllPokemon() {
-        const res = await this.getResource(`ability/`);
-        return res.results;
+    async getAllCards() {
+        const res = await this.getResource(`cards/`);
+        return res.cards.map(this._transformCards);
     }
 
-    getPokemon(id) {
-        const res =  this.getResource(`ability/${id}`);
-        return res;
+    async getCards(id) {
+        const res =  await this.getResource(`cards/${id}`);
+        return this._transformCards(res.card);
     }
 
-/*    async getAllPlanets() {
-        const res = await this.getResource(`planets/`);
-        return res.results;
+    _transformCards(cards) {
+        return {
+            name: cards.name,
+            artist: cards.artist,
+            originalText: cards.originalText,
+            multiverseid: cards.multiverseid,
+            imageUrl: cards.imageUrl,
+        }
     }
-
-    getPlanets(id) {
-        return this.getResource(`planets/${id}`);
-    }
-
-    async getAllStarhips() {
-        const res = await this.getResource(`starships/`);
-        return res.results;
-    }
-
-    getStarships(id) {
-        return this.getResource(`starships/${id}`);
-    }*/
 }

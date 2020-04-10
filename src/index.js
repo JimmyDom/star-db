@@ -9,13 +9,17 @@ import ApiService from "./services/api-service"
 
 ReactDOM.render(<App />, document.getElementById("root"));
 
-const pokemon = new ApiService();
+const cards = new ApiService();
 
 
-pokemon.getPokemon(4).then((people) => {
-//     people.forEach((p) => {
-        console.log(people);
-//     });
+cards.getCards(21).then((cards) => {
+    // cards.forEach((p) => {
+        console.log(cards);
+    // });
 });
 
-//people.effect_changes[0].effect_entries
+// cards.getAllCards().then((cards) => {
+//     cards.forEach((c) => {
+//         console.log(c);
+//     });
+// });

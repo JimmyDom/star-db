@@ -1,3 +1,3 @@
-import RandomPokemon from "./random-pokemon"
+import RandomCards from "./random-cards"
 
-export default RandomPokemon;
+export default RandomCards;
