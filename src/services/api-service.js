@@ -1,5 +1,4 @@
 export default class apiService {
-    // _apiBase = "https://swapi.co/api/";
     _apiBase = "https://api.magicthegathering.io/v1/";
     async getResource(url) {
 

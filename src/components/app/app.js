@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import Header from "../header";
-import RandomCards from "../random-pokemon";
+import RandomCards from "../random-cards";
 import ItemList from "../item-list";
 import PokemonDetails from "../pokemon-details";
 
