@@ -3,11 +3,21 @@ import React, { Component } from "react";
 import Header from "../header";
 import RandomCards from "../random-cards";
 import ItemList from "../item-list";
-import PokemonDetails from "../pokemon-details";
+import CardDetails from "../card-details";
 
 import "./app.css"
 
 export default class App extends Component {
+
+    state = {
+        selectedPerson: null,
+    };
+
+    onCardSelected = (id) => {
+        this.setState({
+            selectedCard: id
+        })
+    };
 
     render() {
         return (
@@ -17,11 +27,11 @@ export default class App extends Component {
 
               <div className="row mb-2">
                   <div className="col-md-6">
-                      <ItemList />
+                      <ItemList onCardSelected={this.onCardSelected}/>
                   </div>
 
                   <div className="col-md-6">
-                      <PokemonDetails />
+                      <CardDetails />
                   </div>
               </div>
 

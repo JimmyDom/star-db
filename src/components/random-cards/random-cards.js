@@ -8,11 +8,6 @@ import ErrorIndicator from "../error-indicator"
 
 export default class RandomCards extends Component{
 
-    constructor() {
-        super();
-        this.updateCards();
-    }
-
     card = new ApiService();
 
     state = {
@@ -20,6 +15,15 @@ export default class RandomCards extends Component{
         loading: true,
         error: false,
     };
+
+    componentDidMount() {
+        this.updateCards();
+        setInterval(this.updateCards, 5000);
+    }
+
+    componentWillMount() {
+
+    }
 
     onCardLoaded = (card) => {
       this.setState({

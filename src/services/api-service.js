@@ -1,5 +1,6 @@
 export default class apiService {
     _apiBase = "https://api.magicthegathering.io/v1/";
+    _id = 1;
     async getResource(url) {
 
         const res = await fetch(`${this._apiBase}${url}`);
@@ -21,8 +22,9 @@ export default class apiService {
         return this._transformCards(res.card);
     }
 
-    _transformCards(cards) {
+    _transformCards = (cards) => {
         return {
+            id: this._id++,
             name: cards.name,
             artist: cards.artist,
             originalText: cards.originalText,
