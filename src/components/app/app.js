@@ -1,21 +1,21 @@
 import React, { Component } from "react";
 
 import Header from "../header";
-import RandomCards from "../random-cards";
+import RandomPlanets from "../random-palnet";
 import ItemList from "../item-list";
-import CardDetails from "../card-details";
+import PeopleDetails from "../people-details";
 
 import "./app.css"
 
 export default class App extends Component {
 
     state = {
-        selectedPerson: null,
+        selectedPeople: null,
     };
 
-    onCardSelected = (id) => {
+    onPeopleSelected = (id) => {
         this.setState({
-            selectedCard: id
+            selectedPeople: id
         })
     };
 
@@ -23,15 +23,15 @@ export default class App extends Component {
         return (
             <div className="app">
               <Header />
-              <RandomCards />
+              <RandomPlanets />
 
               <div className="row mb-2">
                   <div className="col-md-6">
-                      <ItemList onCardSelected={this.onCardSelected}/>
+                      <ItemList onPeopleSelected={this.onPeopleSelected}/>
                   </div>
 
                   <div className="col-md-6">
-                      <CardDetails />
+                      <PeopleDetails peopleId={this.state.selectedPeople}/>
                   </div>
               </div>
 

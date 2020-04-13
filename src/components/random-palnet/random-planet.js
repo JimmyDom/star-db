@@ -2,32 +2,28 @@ import React, { Component } from "react";
 
 import ApiService from "../../services/api-service";
 
-import "./random-cards.css";
+import "./random-planet.css";
 import Spinner from "../spinner";
 import ErrorIndicator from "../error-indicator"
 
-export default class RandomCards extends Component{
+export default class RandomPlanet extends Component{
 
-    card = new ApiService();
+    planets = new ApiService();
 
     state = {
-        card: {},
+        planets: {},
         loading: true,
         error: false,
     };
 
     componentDidMount() {
-        this.updateCards();
-        setInterval(this.updateCards, 5000);
+        this.updatePlanets();
+        setInterval(this.updatePlanets, 5000);
     }
 
-    componentWillMount() {
-
-    }
-
-    onCardLoaded = (card) => {
+    onPlanetsLoaded = (planets) => {
       this.setState({
-          card,
+          planets,
           loading: false,
           error: false
       });
@@ -41,22 +37,22 @@ export default class RandomCards extends Component{
         console.log(err);
     };
 
-    updateCards = () => {
-        const id = Math.floor(Math.random() * 25) + 2;
-        this.card.getCards(id)
-            .then(this.onCardLoaded)
+    updatePlanets = () => {
+        const id = Math.floor(Math.random() * 10) + 1;
+        this.planets.getPlanet(id)
+            .then(this.onPlanetsLoaded)
             .catch(this.onError);
     };
 
     render() {
-        const { card, loading, error } = this.state;
+        const { planets, loading, error } = this.state;
         const errorMessage = error ? <ErrorIndicator /> : null;
         const spinner = loading ? <Spinner /> : null;
-        const content = ( !loading && !error ) ? <CardView card={card}/> : null;
+        const content = ( !loading && !error ) ? <PlanetsView planets={planets}/> : null;
 
         return (
 
-          <div className="random-cards">
+          <div className="random-planet">
               { errorMessage }
               { spinner }
               { content }
@@ -66,32 +62,31 @@ export default class RandomCards extends Component{
 }
 
 
-const CardView = ({ card }) => {
-    const { name, artist, originalText, multiverseid, imageUrl } = card;
-
+const PlanetsView = ({ planets }) => {
+    const { id, name, diameter, population, gravity } = planets;
     return (
       <React.Fragment>
 
           <div>
-              <img className="cards-img"
-                   src={ imageUrl }
-                   alt="cards">
+              <img className="planet-img"
+                   src={ `https://apxuapi.herokuapp.com/assets/img/planets/${id}.jpg` }
+                   alt="planet">
               </img>
           </div>
           <div>
               <h4>{ name }</h4>
               <ul className="list-group list-group-flush">
                   <li className="list-group-item">
-                      <span className="term">Artist:</span>
-                      <span>{ artist }</span>
+                      <span className="term">Diameter:</span>
+                      <span>{ diameter }</span>
                   </li>
                   <li className="list-group-item">
-                      <span className="term">Description:</span>
-                      <span>{ originalText }</span>
+                      <span className="term">Population:</span>
+                      <span>{ population }</span>
                   </li>
                   <li className="list-group-item">
-                      <span className="term">Multiverseid:</span>
-                      <span>{ multiverseid }</span>
+                      <span className="term">Gravity:</span>
+                      <span>{ gravity }</span>
                   </li>
               </ul>
           </div>

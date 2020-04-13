@@ -1,4 +1,4 @@
-.random-cards {
+.random-planet {
     display: flex;
     padding: 5px;
     border: 1px solid #444;
@@ -7,21 +7,21 @@
     margin-bottom: 20px;
 }
 
-.cards-img {
+.planet-img {
     width: auto;
     height: 200px;
     border-radius: 10px;
     margin: 7px 20px 7px 7px;
 }
 
-.random-cards .list-group {
+.random-planet .list-group {
     margin: 5px 0 0 5px;
 }
 
-.random-cards .list-group-item {
+.random-planet .list-group-item {
     padding: 5px 0;
 }
 
-.random-cards .list-group-item .term {
+.random-planet .list-group-item .term {
     margin-right: 10px;
 }

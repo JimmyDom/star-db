@@ -14,17 +14,13 @@ export default class ItemList extends Component {
 
     componentDidMount() {
         this.apiService
-            .getAllCards()
+            .getAllPeople()
             .then((peopleList) => {
                 this.setState({
-                    peopleList
+                    peopleList: peopleList
                 })
             });
     }
-
-    propsOnItemSelected = (id) => {
-        console.log(id);
-    };
 
     renderItems =(arr) => {
         return (
@@ -32,7 +28,7 @@ export default class ItemList extends Component {
                 return (
                     <li className="list-group-item"
                         key={id}
-                        onClick={() => this.propsOnItemSelected(id)}>
+                        onClick={() => this.props.onPeopleSelected(id)}>
                             {name}
                     </li>
                 )
@@ -58,3 +54,4 @@ export default class ItemList extends Component {
         );
     }
 }
+

@@ -9,11 +9,13 @@ import ApiService from "./services/api-service"
 
 ReactDOM.render(<App />, document.getElementById("root"));
 
-const cards = new ApiService();
+/*
+const person = new ApiService();
 
 
-// cards.getAllCards().then((cards) => {
-//     cards.forEach((p) => {
-//         console.log(p);
-//     });
-// });
+person.getPlanet(3).then((person) => {
+    // person.forEach((p) => {
+        console.log(person);
+    // });
+});
+*/
