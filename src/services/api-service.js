@@ -1,7 +1,8 @@
 export default class apiService {
     _apiBase = "http://apxuapi.herokuapp.com/api/";
+    _imgBase = "https://apxuapi.herokuapp.com/assets/img/";
 
-    async getResource(url) {
+    getResource = async (url) => {
 
         const res = await fetch(`${this._apiBase}${url}`);
 
@@ -10,37 +11,49 @@ export default class apiService {
         }
 
         return await res.json();
-    }
+    };
 
-    async getAllPeople() {
+    getAllPeople = async () => {
         const res = await this.getResource(`people/`);
         return res.results.map(this._transformPerson);
-    }
+    };
 
-    async getPeople(id) {
+    getPeople = async (id) => {
         const res =  await this.getResource(`people/${id}`);
         return this._transformPerson(res);
-    }
+    };
 
-    async getAllPlanets() {
+    getPeopleImg = ({ id }) => {
+        return `${this._imgBase}characters/${id}.jpg`
+    };
+
+    getAllPlanets = async () => {
         const res = await this.getResource(`planets/`);
-        return res.results.map(this._transformPerson);
-    }
+        return res.results.map(this._transformPlanet);
+    };
 
-    async getPlanet(id) {
+    getPlanet = async (id) => {
         const res =  await this.getResource(`planets/${id}`);
         return this._transformPlanet(res);
-    }
+    };
 
-    async getAllStarships() {
-        const res = await this.getResource(`people/`);
-        return res.results.map(this._transformPerson);
-    }
+    getPlanetImg = ({ id }) => {
+        return `${this._imgBase}planets/${id}.jpg`
+    };
 
-    async getStarships(id) {
-        const res =  await this.getResource(`people/${id}`);
-        return this._transformPerson(res.results);
-    }
+    getAllStarships = async () =>  {
+        const res = await this.getResource(`starships/`);
+        return res.results.map(this._transformStarships);
+    };
+
+    getStarships = async (id) => {
+        const res =  await this.getResource(`starships/${id}`);
+        return this._transformStarships(res);
+    };
+
+    getStarshipsImg = ({ id }) => {
+        return `${this._imgBase}starships/${id}.jpg`
+    };
 
     _extractId = (item) => {
         const idRegExp = /\/([0-9]*)\/$/;
@@ -65,5 +78,15 @@ export default class apiService {
             gender: person.gender,
             mass: person.mass,
         }
-    }
+    };
+
+    _transformStarships = (starships) => {
+        return {
+            id: this._extractId(starships),
+            name: starships.name,
+            model: starships.model,
+            max_atmosphering_speed: starships.max_atmosphering_speed,
+            cost_in_credits: starships.cost_in_credits,
+        }
+    };
 }

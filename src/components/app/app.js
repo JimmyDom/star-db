@@ -3,38 +3,74 @@ import React, { Component } from "react";
 import Header from "../header";
 import RandomPlanets from "../random-palnet";
 import ItemList from "../item-list";
-import PeopleDetails from "../people-details";
-
+import ItemDetails from "../people-details";
+import PersonPage from "../person-page";
+import ApiService from "../../services/api-service"
 import "./app.css"
+import Row from "../row";
 
 export default class App extends Component {
 
+    apiService = new ApiService();
+
     state = {
-        selectedPeople: null,
+        hasError: false,
     };
 
-    onPeopleSelected = (id) => {
-        this.setState({
-            selectedPeople: id
-        })
-    };
+    componentDidCatch() {
+        this.setState({ hasError: true })
+    }
 
     render() {
+        const personDetails = (
+            <ItemDetails
+            itemId={11}
+            getData = { this.apiService.getPeople }
+            getImgUrl={ this.apiService.getPeopleImg } />
+        );
+        const starshipDetails = (
+            <ItemDetails
+            itemId={5}
+            getData={ this.apiService.getStarships }
+            getImgUrl = { this.apiService.getStarshipsImg } />
+        );
+
         return (
             <div className="app">
               <Header />
-              <RandomPlanets />
+              {/*<RandomPlanets />*/}
 
-              <div className="row mb-2">
-                  <div className="col-md-6">
-                      <ItemList onPeopleSelected={this.onPeopleSelected}/>
-                  </div>
+                {/*<PersonPage*/}
+                    {/*getData = { this.apiService.getAllPeople } />*/}
 
-                  <div className="col-md-6">
-                      <PeopleDetails peopleId={this.state.selectedPeople}/>
-                  </div>
-              </div>
+                    <Row left={personDetails} right={starshipDetails}/>
 
+
+                {/*<div className="row mb-2">*/}
+                    {/*<div className="col-md-6">*/}
+                        {/*<ItemList*/}
+                            {/*getData = { this.apiService.getAllPlanets }*/}
+                            {/*onPeopleSelected={this.onPeopleSelected}*/}
+                            {/*getRender = { ({ name, diameter}) => `${name} (${diameter})`}/>*/}
+                    {/*</div>*/}
+
+                    {/*<div className="col-md-6">*/}
+                        {/*<PeopleDetails peopleId={this.state.selectedPeople}/>*/}
+                    {/*</div>*/}
+                {/*</div>*/}
+
+                {/*<div className="row mb-2">*/}
+                    {/*<div className="col-md-6">*/}
+                        {/*<ItemList*/}
+                            {/*getData = { this.apiService.getAllStarships }*/}
+                            {/*onPeopleSelected={this.onPeopleSelected}*/}
+                            {/*getRender = { ({ name, model}) => `${name} (${model})`}/>*/}
+                    {/*</div>*/}
+
+                    {/*<div className="col-md-6">*/}
+                        {/*<PeopleDetails peopleId={this.state.selectedPeople}/>*/}
+                    {/*</div>*/}
+                {/*</div>*/}
             </div>
         );
     }
