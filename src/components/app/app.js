@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Header from "../header";
 import RandomPlanets from "../random-palnet";
 import ItemList from "../item-list";
-import ItemDetails from "../people-details";
+import ItemDetails, { Record } from "../item-details";
 import PersonPage from "../person-page";
 import ApiService from "../../services/api-service"
 import "./app.css"
@@ -26,13 +26,23 @@ export default class App extends Component {
             <ItemDetails
             itemId={11}
             getData = { this.apiService.getPeople }
-            getImgUrl={ this.apiService.getPeopleImg } />
+            getImgUrl={ this.apiService.getPeopleImg } >
+
+                <Record field="gender" label="Gender" />
+                <Record field="birth_year" label="Birth Year" />
+
+            </ItemDetails>
         );
         const starshipDetails = (
             <ItemDetails
             itemId={5}
             getData={ this.apiService.getStarships }
-            getImgUrl = { this.apiService.getStarshipsImg } />
+            getImgUrl = { this.apiService.getStarshipsImg } >
+
+                <Record field="model" label="Model" />
+                <Record field="max_atmosphering_speed" label="Max Atmosphering Speed" />
+
+            </ItemDetails>
         );
 
         return (
