@@ -3,9 +3,5 @@ import ReactDOM from "react-dom";
 
 import App from "./components/app"
 
-import ApiService from "./services/swapi-service"
-
-
-
 ReactDOM.render(<App />, document.getElementById("root"));
 
